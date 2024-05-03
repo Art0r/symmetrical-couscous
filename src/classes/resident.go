@@ -7,7 +7,7 @@ type Resident struct {
 	Name string `json:"name"`
 	Email string `json:"email"`
 	Telephone string `json:"telephone"`
-	Apto uint64 `json:"apto"`
+	Apto int64 `json:"apto"`
 	Created time.Time `json:"created"`
 	Updated time.Time `json:"update"`
 }

@@ -1,60 +1,54 @@
 package main
 
 import (
-	"fmt"
-	"net/http"
+	"math/rand"
 
 	"time"
 
 	"github.com/Art0r/symmetrical-couscous/src/classes"
 	"github.com/Art0r/symmetrical-couscous/src/database"
 	"github.com/Art0r/symmetrical-couscous/src/models"
-	"github.com/gin-gonic/gin"
+	"github.com/bxcodec/faker/v3"
 	"github.com/google/uuid"
 	_ "github.com/mattn/go-sqlite3"
 )
+
+func populateDatabase() {
+
+	for i := 0; i < 10; i++ {
+		
+		id := uuid.NewString()
+		now := time.Now()
+		name := faker.Name()
+		email := faker.Email()
+		telephone := faker.Phonenumber()
+		apto := rand.Int63n(2000)
+
+		resident := classes.Resident{
+			Id:        id,
+			Name:      name,
+			Email:     email,
+			Telephone: telephone,
+			Apto:      apto,
+			Created:   now,
+		}
+
+		models.CreateResident(resident)
+	}
+
+}
 
 func main() {
 
 	database.StartDb()
 
-	res1 := classes.Resident{
-		Id:        uuid.NewString(),
-		Name:      "Maria",
-		Email:     "maria@maria.com",
-		Telephone: "11923456789",
-		Apto:      123,
-		Created:   time.Now(),
-	}
+	populateDatabase()
 
-	res2 := classes.Resident{
-		Id:        uuid.NewString(),
-		Name:      "Joao",
-		Email:     "joao@joao.com",
-		Telephone: "11923456789",
-		Apto:      124,
-		Created:   time.Now(),
-	}
+	// r := gin.Default()
 
-	res3 := classes.Resident{
-		Id:        uuid.NewString(),
-		Name:      "Jose",
-		Email:     "jose@jose.com",
-		Telephone: "11923456789",
-		Apto:      125,
-		Created:   time.Now(),
-	}
+	// r.GET("", func(ctx *gin.Context) {
+	// 	ctx.String(http.StatusOK, "Hello World")
+	// })
 
-	fmt.Println(res1)
-	models.CreateResident(res1)
-	models.CreateResident(res2)
-	models.CreateResident(res3)
-
-	r := gin.Default()
-
-	r.GET("", func(ctx *gin.Context) {
-		ctx.String(http.StatusOK, "Hello World")
-	})
-
-	r.Run("192.168.18.12:8000")
+	// r.Run("192.168.18.12:8000")
 }

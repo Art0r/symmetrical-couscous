@@ -7,7 +7,6 @@ import (
 	"github.com/Art0r/symmetrical-couscous/src/utils"
 )
 
-
 func InitConnection() (*sql.DB, error) {
 	db, err := sql.Open("sqlite3", "db.sqlite3")
 
@@ -17,7 +16,6 @@ func InitConnection() (*sql.DB, error) {
 
 	return db, nil
 }
-
 
 func StartDb() {
 
@@ -46,12 +44,12 @@ func StartDb() {
 		log.Fatal("Error executing initial routine: ", err.Error())
 	}
 
-    _, err = stmt.Exec()
-    if err != nil {
-        log.Fatal("Error executing statement: ", err.Error())
-    }
+	_, err = stmt.Exec()
+	if err != nil {
+		log.Fatal("Error executing statement: ", err.Error())
+	}
 	defer stmt.Close()
-	
+
 	log.Println("Executed initial routine")
 
 }
