@@ -2,13 +2,14 @@ package main
 
 import (
 	"math/rand"
-
 	"time"
 
 	"github.com/Art0r/symmetrical-couscous/src/classes"
 	"github.com/Art0r/symmetrical-couscous/src/database"
 	"github.com/Art0r/symmetrical-couscous/src/models"
+	"github.com/Art0r/symmetrical-couscous/src/views"
 	"github.com/bxcodec/faker/v3"
+	"github.com/gin-gonic/gin"
 	"github.com/google/uuid"
 	_ "github.com/mattn/go-sqlite3"
 )
@@ -39,16 +40,14 @@ func populateDatabase() {
 }
 
 func main() {
+	gin.SetMode(gin.DebugMode)
+	r := gin.Default()
+	r.SetTrustedProxies([]string{"127.0.0.1", "localhost"})
 
 	database.StartDb()
-
 	populateDatabase()
 
-	// r := gin.Default()
+	views.SetViews(r)
 
-	// r.GET("", func(ctx *gin.Context) {
-	// 	ctx.String(http.StatusOK, "Hello World")
-	// })
-
-	// r.Run("192.168.18.12:8000")
+	r.Run("192.168.18.12:8000")
 }
