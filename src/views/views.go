@@ -7,9 +7,6 @@ import (
 )
 
 func SetViews(r *gin.Engine) {
-	r.LoadHTMLGlob("templates/*")
-	r.Static("/static", "static")
-
 	v := r.Group("")
 
 	{

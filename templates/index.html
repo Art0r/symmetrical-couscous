@@ -1,26 +1,7 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<style>
-    .preload {
-        visibility: hidden;
-    }
-</style>
-
-<body class="preload">
-    <h1 class="title is-1">{{ .title }}</h1>
-</body>
-<script src="/static/bulma.bundle.js"></script>
-
-<script>
-    window.addEventListener('load', () => {
-        document.body.classList.remove('preload');
-    });
-</script>
-
-</html>
+{{template "header.html"}}
+<section class="section">
+    <div class="container">
+        <h1 class="title is-1">{{ .title }}</h1>
+    </div>
+</section>
+{{template "footer.html"}}

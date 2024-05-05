@@ -1,7 +1,7 @@
 const path = require('path');
 
 module.exports = {
-    entry: { bulma: './assets/js/bulma.js' },
+    entry: { bulma: 'bulma/css/bulma.css' },
     mode: 'production',
     output: {
         filename: '[name].bundle.js',

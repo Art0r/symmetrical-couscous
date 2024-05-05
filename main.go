@@ -17,7 +17,7 @@ import (
 func populateDatabase() {
 
 	for i := 0; i < 10; i++ {
-		
+
 		id := uuid.NewString()
 		now := time.Now()
 		name := faker.Name()
@@ -47,7 +47,11 @@ func main() {
 	database.StartDb()
 	populateDatabase()
 
+	r.LoadHTMLGlob("templates/*")
+	r.Static("/static", "static")
+
 	views.SetViews(r)
 
-	r.Run("192.168.18.12:8000")
+	//r.Run("192.168.18.12:8000")
+	r.Run(":8000")
 }
