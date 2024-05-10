@@ -2,9 +2,13 @@ package controllers
 
 import (
 	"encoding/json"
+	"fmt"
 	"net/http"
 
 	"github.com/Art0r/symmetrical-couscous/src/classes"
+	"github.com/Art0r/symmetrical-couscous/src/models"
+	"github.com/Art0r/symmetrical-couscous/src/utils"
+
 	"github.com/gin-gonic/gin"
 )
 
@@ -25,9 +29,23 @@ func Default(ctx *gin.Context) {
 		return
 	}
 
-	
+	resident, err := models.RetrieveResidentETA(response)
+	if err != nil {
+		ctx.String(http.StatusNotFound, err.Error())
+		return
+	}
 
-	ctx.JSON(http.StatusOK, response)
+	hash := utils.CreateHash(response.Email, response.Telephone, response.Apto)
+
+	fmt.Println(resident["Hash"])
+	fmt.Println(hash)
+	
+	if hash == resident["Hash"] {
+		ctx.JSON(http.StatusOK, resident)
+		return
+	}
+
+	ctx.JSON(http.StatusForbidden, resident)
 }
 
 func DefaultHtml(ctx *gin.Context) {

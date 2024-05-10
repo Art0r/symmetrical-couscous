@@ -2,6 +2,7 @@ package main
 
 import (
 	"math/rand"
+	"strconv"
 	"time"
 
 	"github.com/Art0r/symmetrical-couscous/src/classes"
@@ -26,7 +27,9 @@ func populateDatabase() {
 		telephone := faker.Phonenumber()
 		apto := rand.Int63n(2000)
 
-		hash := utils.CreateHash(email, telephone, string(rune(apto)))
+		strApto := strconv.FormatInt(apto, 10) // s == "97" (decimal)
+
+		hash := utils.CreateHash(email, telephone, strApto)
 		
 		resident := classes.Resident{
 			Id:        id,
