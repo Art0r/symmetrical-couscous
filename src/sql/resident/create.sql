@@ -1,1 +1,1 @@
-INSERT INTO resident (Id, Email, Name, Apto, Telephone, Created) VALUES (?, ?, ?, ?, ?, ?);
+INSERT INTO resident (Id, Email, Name, Apto, Hash, Telephone, Created) VALUES (?, ?, ?, ?, ?, ?, ?);

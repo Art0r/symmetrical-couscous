@@ -7,6 +7,7 @@ import (
 	"github.com/Art0r/symmetrical-couscous/src/classes"
 	"github.com/Art0r/symmetrical-couscous/src/database"
 	"github.com/Art0r/symmetrical-couscous/src/models"
+	"github.com/Art0r/symmetrical-couscous/src/utils"
 	"github.com/Art0r/symmetrical-couscous/src/views"
 	"github.com/bxcodec/faker/v3"
 	"github.com/gin-gonic/gin"
@@ -25,12 +26,15 @@ func populateDatabase() {
 		telephone := faker.Phonenumber()
 		apto := rand.Int63n(2000)
 
+		hash := utils.CreateHash(email, telephone, string(rune(apto)))
+		
 		resident := classes.Resident{
 			Id:        id,
 			Name:      name,
 			Email:     email,
 			Telephone: telephone,
 			Apto:      apto,
+			Hash:      hash,
 			Created:   now,
 		}
 
@@ -43,7 +47,7 @@ func main() {
 	gin.SetMode(gin.DebugMode)
 	r := gin.Default()
 	r.SetTrustedProxies([]string{"127.0.0.1", "localhost"})
-
+	
 	database.StartDb()
 	populateDatabase()
 

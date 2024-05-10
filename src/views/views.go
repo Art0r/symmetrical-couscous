@@ -7,10 +7,10 @@ import (
 )
 
 func SetViews(r *gin.Engine) {
-	v := r.Group("")
+	v := r.Group("api/")
 
 	{
-		v.GET("", controllers.Default)
+		v.POST("", controllers.Default)
 		v.GET("index/", controllers.DefaultHtml)
 	}
 }

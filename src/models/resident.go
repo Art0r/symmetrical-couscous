@@ -30,6 +30,7 @@ func CreateResident(resident classes.Resident) {
 		resident.Email,
 		resident.Name,
 		resident.Apto,
+		resident.Hash,
 		resident.Telephone,
 		resident.Created,
 	)
